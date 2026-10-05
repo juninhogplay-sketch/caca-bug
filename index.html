@@ -56,11 +56,15 @@
       color: #666;
     }
 
+    #ofertas {
+      display: grid;
+      gap: 18px;
+    }
+
     .oferta {
       background: white;
       border-radius: 12px;
       padding: 20px;
-      margin-bottom: 18px;
       box-shadow: 0 3px 12px rgba(0,0,0,0.08);
     }
 
@@ -78,6 +82,12 @@
     .oferta h3 {
       font-size: 21px;
       margin-bottom: 10px;
+    }
+
+    .loja {
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 8px;
     }
 
     .preco-antigo {
@@ -103,8 +113,10 @@
       font-weight: bold;
     }
 
-    .botao:hover {
-      background: #116b29;
+    .mensagem {
+      text-align: center;
+      padding: 30px;
+      color: #666;
     }
 
     footer {
@@ -130,40 +142,8 @@
       <p>Preços absurdamente baixos merecem ser caçados.</p>
     </div>
 
-    <div class="oferta">
-      <span class="bug">🐛 POSSÍVEL BUG</span>
-
-      <h3>Produto em oferta</h3>
-
-      <div class="preco-antigo">
-        De R$ 199,90
-      </div>
-
-      <div class="preco">
-        R$ 49,90
-      </div>
-
-      <a href="#" class="botao">
-        VER OFERTA
-      </a>
-    </div>
-
-    <div class="oferta">
-      <span class="bug">🔥 OFERTA</span>
-
-      <h3>Outra oportunidade</h3>
-
-      <div class="preco-antigo">
-        De R$ 299,90
-      </div>
-
-      <div class="preco">
-        R$ 79,90
-      </div>
-
-      <a href="#" class="botao">
-        VER OFERTA
-      </a>
+    <div id="ofertas">
+      <div class="mensagem">🔎 Carregando ofertas...</div>
     </div>
 
   </main>
@@ -171,6 +151,58 @@
   <footer>
     © 2026 CAÇA BUG — Encontre. Compare. Economize. 🐛💰
   </footer>
+
+  <script>
+    fetch("ofertas.json")
+      .then(resposta => resposta.json())
+      .then(ofertas => {
+
+        const area = document.getElementById("ofertas");
+
+        area.innerHTML = "";
+
+        ofertas.forEach(oferta => {
+
+          const card = document.createElement("div");
+
+          card.className = "oferta";
+
+          const etiqueta =
+            oferta.tipo === "possivel_bug"
+              ? "🐛 POSSÍVEL BUG"
+              : "🔥 OFERTA";
+
+          card.innerHTML = `
+            <span class="bug">${etiqueta}</span>
+
+            <h3>${oferta.produto}</h3>
+
+            <div class="loja">
+              🏪 ${oferta.loja}
+            </div>
+
+            <div class="preco-antigo">
+              De R$ ${oferta.preco_normal.toFixed(2).replace(".", ",")}
+            </div>
+
+            <div class="preco">
+              R$ ${oferta.preco_oferta.toFixed(2).replace(".", ",")}
+            </div>
+
+            <a href="${oferta.link}" class="botao">
+              VER OFERTA
+            </a>
+          `;
+
+          area.appendChild(card);
+        });
+
+      })
+      .catch(() => {
+        document.getElementById("ofertas").innerHTML =
+          '<div class="mensagem">⚠️ Não foi possível carregar as ofertas.</div>';
+      });
+  </script>
 
 </body>
 </html>
