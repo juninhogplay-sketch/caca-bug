@@ -1,0 +1,18 @@
+[
+  {
+    "produto": "Produto de teste",
+    "preco_normal": 199.90,
+    "preco_oferta": 49.90,
+    "loja": "Loja de teste",
+    "link": "#",
+    "tipo": "possivel_bug"
+  },
+  {
+    "produto": "Outro produto de teste",
+    "preco_normal": 299.90,
+    "preco_oferta": 79.90,
+    "loja": "Outra loja",
+    "link": "#",
+    "tipo": "oferta"
+  }
+]
