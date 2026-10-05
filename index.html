@@ -64,8 +64,19 @@
     .oferta {
       background: white;
       border-radius: 12px;
-      padding: 20px;
+      overflow: hidden;
       box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    }
+
+    .imagem {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .conteudo {
+      padding: 20px;
     }
 
     .bug {
@@ -79,12 +90,24 @@
       margin-bottom: 12px;
     }
 
-    .oferta h3 {
-      font-size: 21px;
-      margin-bottom: 10px;
+    .desconto {
+      display: inline-block;
+      background: #168a35;
+      color: white;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: bold;
+      margin-left: 5px;
     }
 
-    .loja {
+    .oferta h3 {
+      font-size: 21px;
+      margin: 10px 0;
+    }
+
+    .loja,
+    .data {
       color: #666;
       font-size: 14px;
       margin-bottom: 8px;
@@ -143,66 +166,4 @@
     </div>
 
     <div id="ofertas">
-      <div class="mensagem">🔎 Carregando ofertas...</div>
-    </div>
-
-  </main>
-
-  <footer>
-    © 2026 CAÇA BUG — Encontre. Compare. Economize. 🐛💰
-  </footer>
-
-  <script>
-    fetch("ofertas.json")
-      .then(resposta => resposta.json())
-      .then(ofertas => {
-
-        const area = document.getElementById("ofertas");
-
-        area.innerHTML = "";
-
-        ofertas.forEach(oferta => {
-
-          const card = document.createElement("div");
-
-          card.className = "oferta";
-
-          const etiqueta =
-            oferta.tipo === "possivel_bug"
-              ? "🐛 POSSÍVEL BUG"
-              : "🔥 OFERTA";
-
-          card.innerHTML = `
-            <span class="bug">${etiqueta}</span>
-
-            <h3>${oferta.produto}</h3>
-
-            <div class="loja">
-              🏪 ${oferta.loja}
-            </div>
-
-            <div class="preco-antigo">
-              De R$ ${oferta.preco_normal.toFixed(2).replace(".", ",")}
-            </div>
-
-            <div class="preco">
-              R$ ${oferta.preco_oferta.toFixed(2).replace(".", ",")}
-            </div>
-
-            <a href="${oferta.link}" class="botao">
-              VER OFERTA
-            </a>
-          `;
-
-          area.appendChild(card);
-        });
-
-      })
-      .catch(() => {
-        document.getElementById("ofertas").innerHTML =
-          '<div class="mensagem">⚠️ Não foi possível carregar as ofertas.</div>';
-      });
-  </script>
-
-</body>
-</html>
+      <div class="mens
