@@ -3,150 +3,94 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>CAÇA BUG 🐛</title>
 
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
-      background: #f4f4f4;
+      background: #f2f2f2;
       color: #222;
     }
 
     header {
       background: #111;
       color: white;
-      padding: 22px 15px;
       text-align: center;
+      padding: 25px 15px;
     }
 
     header h1 {
+      margin: 0;
       font-size: 32px;
-      margin-bottom: 8px;
     }
 
     header p {
+      margin: 8px 0 0;
       color: #ccc;
-      font-size: 15px;
-    }
-
-    .container {
-      max-width: 900px;
-      margin: 25px auto;
-      padding: 0 15px;
-    }
-
-    .titulo {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .titulo h2 {
-      font-size: 25px;
-      margin-bottom: 8px;
-    }
-
-    .titulo p {
-      color: #666;
     }
 
     #ofertas {
+      max-width: 900px;
+      margin: 25px auto;
+      padding: 0 15px;
       display: grid;
-      gap: 18px;
+      gap: 20px;
     }
 
     .oferta {
       background: white;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-    }
-
-    .imagem {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .conteudo {
+      border-radius: 15px;
       padding: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.10);
     }
 
     .bug {
       display: inline-block;
-      background: #e53935;
+      background: #ff3333;
       color: white;
-      padding: 6px 10px;
-      border-radius: 6px;
-      font-size: 12px;
+      padding: 7px 12px;
+      border-radius: 20px;
       font-weight: bold;
-      margin-bottom: 12px;
+      font-size: 13px;
     }
 
-    .desconto {
-      display: inline-block;
-      background: #168a35;
-      color: white;
-      padding: 6px 10px;
-      border-radius: 6px;
-      font-size: 12px;
-      font-weight: bold;
-      margin-left: 5px;
+    h2 {
+      margin-bottom: 5px;
     }
 
-    .oferta h3 {
-      font-size: 21px;
-      margin: 10px 0;
-    }
-
-    .loja,
-    .data {
+    .loja {
       color: #666;
-      font-size: 14px;
-      margin-bottom: 8px;
+      margin: 8px 0;
     }
 
     .preco-antigo {
       color: #888;
       text-decoration: line-through;
-      font-size: 14px;
     }
 
     .preco {
-      font-size: 28px;
+      font-size: 30px;
       font-weight: bold;
-      color: #168a35;
-      margin: 5px 0 15px;
+      color: #008000;
+      margin: 8px 0 15px;
     }
 
     .botao {
       display: inline-block;
-      background: #168a35;
+      background: #111;
       color: white;
       text-decoration: none;
-      padding: 12px 18px;
+      padding: 12px 20px;
       border-radius: 8px;
       font-weight: bold;
     }
 
     .mensagem {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
       text-align: center;
-      padding: 30px;
-      color: #666;
-    }
-
-    footer {
-      text-align: center;
-      padding: 30px 15px;
-      color: #777;
-      font-size: 13px;
     }
   </style>
 </head>
@@ -158,12 +102,48 @@
     <p>Caçador de ofertas e bugs de preço</p>
   </header>
 
-  <main class="container">
-
-    <div class="titulo">
-      <h2>🔥 Ofertas encontradas</h2>
-      <p>Preços absurdamente baixos merecem ser caçados.</p>
+  <main id="ofertas">
+    <div class="mensagem">
+      🔎 Carregando ofertas...
     </div>
+  </main>
 
-    <div id="ofertas">
-      <div class="mens
+  <script>
+    fetch("./ofertas.json")
+      .then(resposta => {
+        if (!resposta.ok) {
+          throw new Error("Erro ao carregar ofertas.json");
+        }
+        return resposta.json();
+      })
+      .then(ofertas => {
+
+        const area = document.getElementById("ofertas");
+
+        area.innerHTML = "";
+
+        ofertas.forEach(oferta => {
+
+          const card = document.createElement("div");
+          card.className = "oferta";
+
+          const etiqueta =
+            oferta.tipo === "possivel_bug"
+              ? "🐛 POSSÍVEL BUG"
+              : "🔥 OFERTA";
+
+          card.innerHTML = `
+            <span class="bug">${etiqueta}</span>
+
+            <h2>${oferta.produto}</h2>
+
+            <div class="loja">
+              🏪 ${oferta.loja}
+            </div>
+
+            <div class="preco-antigo">
+              De R$ ${Number(oferta.preco_normal).toFixed(2).replace(".", ",")}
+            </div>
+
+            <div class="preco">
+              R$ ${Number(oferta.preco
