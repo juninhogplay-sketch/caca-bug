@@ -85,11 +85,26 @@ fetch("./ofertas.json")
       const item = document.createElement("div");
 
       item.innerHTML = `
-        <h2>${oferta.produto}</h2>
-        <p>Loja: ${oferta.loja}</p>
-        <p>De: R$ ${oferta.preco_normal}</p>
-        <p>Por: R$ ${oferta.preco_oferta}</p>
-      `;
+  <span class="etiqueta">
+    ${oferta.tipo === "possivel_bug" ? "🐛 POSSÍVEL BUG" : "🔥 OFERTA"}
+  </span>
+
+  <h2>${oferta.produto}</h2>
+
+  <p>🏪 ${oferta.loja}</p>
+
+  <p class="antigo">
+    De: R$ ${Number(oferta.preco_normal).toFixed(2).replace(".", ",")}
+  </p>
+
+  <p class="preco">
+    R$ ${Number(oferta.preco_oferta).toFixed(2).replace(".", ",")}
+  </p>
+
+  <a href="${oferta.link}" class="botao">
+    VER OFERTA
+  </a>
+`;
 
       area.appendChild(item);
 
