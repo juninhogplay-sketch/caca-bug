@@ -95,6 +95,16 @@ header {
   font-weight: bold;
   color: green;
 }
+    .desconto {
+  display: inline-block;
+  background: #16a34a;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 14px;
+  margin: 5px 0 10px;
+}
   </style>
 
 <p>Caçador de ofertas e bugs de preço</p>
@@ -149,7 +159,8 @@ fetch("./ofertas.json")
     document.getElementById("ofertas").innerHTML =
       "ERRO AO CARREGAR OFERTAS";
   });
+  
 </script>
-
+  
 </body>
 </html>
