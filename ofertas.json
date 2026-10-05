@@ -1,18 +1,22 @@
 [
   {
-    "produto": "Produto de teste",
+    "produto": "Fone Bluetooth Premium",
+    "imagem": "https://via.placeholder.com/600x400",
     "preco_normal": 199.90,
     "preco_oferta": 49.90,
     "loja": "Loja de teste",
     "link": "#",
-    "tipo": "possivel_bug"
+    "tipo": "possivel_bug",
+    "data": "2026-10-05"
   },
   {
-    "produto": "Outro produto de teste",
+    "produto": "Smartwatch Esportivo",
+    "imagem": "https://via.placeholder.com/600x400",
     "preco_normal": 299.90,
     "preco_oferta": 79.90,
     "loja": "Outra loja",
     "link": "#",
-    "tipo": "oferta"
+    "tipo": "oferta",
+    "data": "2026-10-05"
   }
 ]
