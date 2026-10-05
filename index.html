@@ -1,13 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CAÇA BUG</title>
 </head>
+
 <body>
 
 <h1>🐛 CAÇA BUG 💰</h1>
 
-<p>TESTE FUNCIONANDO</p>
+<p>Caçador de ofertas e bugs de preço</p>
+
+<div id="ofertas">
+  Carregando ofertas...
+</div>
+
+<script>
+fetch("./ofertas.json")
+  .then(resposta => resposta.json())
+  .then(ofertas => {
+
+    const area = document.getElementById("ofertas");
+
+    area.innerHTML = "";
+
+    ofertas.forEach(oferta => {
+
+      const item = document.createElement("div");
+
+      item.innerHTML = `
+        <h2>${oferta.produto}</h2>
+        <p>Loja: ${oferta.loja}</p>
+        <p>De: R$ ${oferta.preco_normal}</p>
+        <p>Por: R$ ${oferta.preco_oferta}</p>
+      `;
+
+      area.appendChild(item);
+
+    });
+
+  })
+  .catch(erro => {
+    document.getElementById("ofertas").innerHTML =
+      "ERRO AO CARREGAR OFERTAS";
+  });
+</script>
 
 </body>
 </html>
