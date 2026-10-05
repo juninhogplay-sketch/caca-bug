@@ -128,7 +128,9 @@ fetch("./ofertas.json")
   <p class="antigo">
     De: R$ ${Number(oferta.preco_normal).toFixed(2).replace(".", ",")}
   </p>
-
+<p class="desconto">
+  🔥 ${Math.round((1 - oferta.preco_oferta / oferta.preco_normal) * 100)}% DE DESCONTO
+</p>
   <p class="preco">
     R$ ${Number(oferta.preco_oferta).toFixed(2).replace(".", ",")}
   </p>
