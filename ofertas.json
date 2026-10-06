@@ -1,16 +1,15 @@
 [
-  {
-    "produto": "Fone Bluetooth Premium",
-    "imagem": 
-    "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80",
-    "preco_normal": 199.90,
-    "preco_oferta": 49.90,
-    "loja": "Loja de teste",
-    "data": "05/10/2026 21:30",
-    "link": "#",
-    "tipo": "possivel_bug"
-    "nivel": "ALTO"
-  },
+{
+  "produto": "Fone Bluetooth Premium",
+  "imagem": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80",
+  "preco_normal": 199.90,
+  "preco_oferta": 49.90,
+  "loja": "Loja de teste",
+  "data": "05/10/2026 21:30",
+  "link": "#",
+  "tipo": "possivel_bug",
+  "nivel": "ALTO"
+}
   {
     "produto": "Smartwatch Esportivo",
     "imagem": 
@@ -20,7 +19,7 @@
     "loja": "Outra loja",
     "data": "05/10/2026 21:30",
     "link": "#",
-    "tipo": "oferta"
+    "tipo": "oferta",
     "nivel": "NORMAL"
   }
 ]
