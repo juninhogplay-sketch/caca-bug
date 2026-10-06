@@ -1,9 +1,80 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CAÇA BUG</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CAÇA BUG</title>
+
+<style>
+body{
+font-family:Arial,sans-serif;
+margin:0;
+background:#f2f2f2;
+color:#222;
+}
+
+header{
+background:#111;
+color:white;
+text-align:center;
+padding:25px 10px;
+}
+
+#ofertas{
+max-width:700px;
+margin:25px auto;
+padding:10px;
+}
+
+.card{
+background:white;
+padding:20px;
+margin-bottom:20px;
+border-radius:15px;
+box-shadow:0 4px 15px #ccc;
+}
+
+.bug{
+display:inline-block;
+background:#e53935;
+color:white;
+padding:6px 10px;
+border-radius:8px;
+font-weight:bold;
+}
+
+.desconto{
+display:inline-block;
+background:#16a34a;
+color:white;
+padding:6px 10px;
+border-radius:8px;
+font-weight:bold;
+}
+
+.antigo{
+color:#888;
+text-decoration:line-through;
+}
+
+.preco{
+font-size:32px;
+font-weight:bold;
+color:#16a34a;
+}
+
+.botao{
+display:block;
+background:#16a34a;
+color:white;
+text-align:center;
+text-decoration:none;
+padding:14px;
+border-radius:10px;
+font-weight:bold;
+margin-top:15px;
+}
+</style>
 </head>
 
 <body>
@@ -12,172 +83,48 @@
 <h1>🐛 CAÇA BUG 💰</h1>
 <p>Caçador de ofertas e bugs de preço</p>
 </header>
-  <style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f2f2f2;
-  color: #222;
-}
 
-header {
-  background: #111;
-  color: white;
-  text-align: center;
-  padding: 25px 15px;
-}
-
-#ofertas {
-  max-width: 900px;
-  margin: 25px auto;
-  padding: 15px;
-}
-
-.oferta {
-  background: white;
-  padding: 24px;
-  margin-bottom: 22px;
-  border-radius: 20px;
-  box-shadow: 0 6px 22px rgba(0,0,0,.14);
-  border: 1px solid #e5e5e5;
-}
-
-.oferta h2 {
-  margin: 5px 0 12px 0;
-  font-size: 23px;
-}
-
-.oferta p {
-  margin: 8px 0;
-  font-size: 16px;
-}
-
-.oferta h2 {
-  margin: 0 0 10px 0;
-  font-size: 22px;
-}
-
-.oferta p {
-  margin: 7px 0;
-  font-size: 16px;
-}
-
-.oferta p:last-child {
-  font-size: 28px;
-  font-weight: bold;
-  color: green;
-}
-.etiqueta {
-  display: inline-block;
-  background: #ff3333;
-  color: white;
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 13px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.antigo {
-  color: #888;
-  text-decoration: line-through;
-}
-
-.preco {
-  font-size: 32px !important;
-  font-weight: bold;
-  color: #008000;
-  margin: 8px 0 15px;
-}
-
-.botao {
-  display: block;
-  background: #16a34a;
-  color: white;
-  text-decoration: none;
-  padding: 14px 20px;
-  border-radius: 10px;
-  font-weight: bold;
-  text-align: center;
-  margin-top: 15px;
-  font-size: 17px;
-}
-
-.botao:hover {
-  opacity: 0.9;
-}
-.preco {
-  font-size: 34px !important;
-  font-weight: bold;
-  color: #16a34a;
-  margin: 8px 0 15px;
-}
-    .desconto {
-  display: inline-block;
-  background: #16a34a;
-  color: white;
-  padding: 6px 10px;
-  border-radius: 8px;
-  font-weight: bold;
-  font-size: 14px;
-  margin: 5px 0 10px;
-}
-  </style>
-
-<p>Caçador de ofertas e bugs de preço</p>
-
-<div id="ofertas">
-  Carregando ofertas...
-</div>
+<div id="ofertas">Carregando...</div>
 
 <script>
 fetch("./ofertas.json")
-  .then(resposta => resposta.json())
-  .then(ofertas => {
+.then(r=>r.json())
+.then(ofertas=>{
+const area=document.getElementById("ofertas");
+area.innerHTML="";
 
-    const area = document.getElementById("ofertas");
+ofertas.forEach(o=>{
 
-    area.innerHTML = "";
+const desconto=Math.round((1-o.preco_oferta/o.preco_normal)*100);
 
-    ofertas.forEach(oferta => {
+const card=document.createElement("div");
+card.className="card";
 
-      const item = document.createElement("div");
+card.innerHTML=`
+<span class="bug">${o.tipo==="possivel_bug"?"🐛 POSSÍVEL BUG":"🔥 OFERTA"}</span>
 
-      item.innerHTML = `
-  <span class="etiqueta">
-    ${oferta.tipo === "possivel_bug" ? "🐛 POSSÍVEL BUG" : "🔥 OFERTA"}
-  </span>
+<h2>${o.produto}</h2>
 
-  <h2>${oferta.produto}</h2>
+<p>🏪 ${o.loja}</p>
 
-  <p>🏪 ${oferta.loja}</p>
+<p class="antigo">De: R$ ${Number(o.preco_normal).toFixed(2).replace(".",",")}</p>
 
-  <p class="antigo">
-    De: R$ ${Number(oferta.preco_normal).toFixed(2).replace(".", ",")}
-  </p>
-<p class="desconto">
-  🔥 ${Math.round((1 - oferta.preco_oferta / oferta.preco_normal) * 100)}% DE DESCONTO
-</p>
-  <p class="preco">
-    R$ ${Number(oferta.preco_oferta).toFixed(2).replace(".", ",")}
-  </p>
+<p class="desconto">🔥 ${desconto}% DE DESCONTO</p>
 
-  <a href="${oferta.link}" class="botao">
-    VER OFERTA
-  </a>
+<p class="preco">R$ ${Number(o.preco_oferta).toFixed(2).replace(".",",")}</p>
+
+<a class="botao" href="${o.link}">VER OFERTA</a>
 `;
 
-      area.appendChild(item);
+area.appendChild(card);
 
-    });
-
-  })
-  .catch(erro => {
-    document.getElementById("ofertas").innerHTML =
-      "ERRO AO CARREGAR OFERTAS";
-  });
-  
+});
+})
+.catch(()=>{
+document.getElementById("ofertas").innerHTML=
+"<p>❌ Erro ao carregar ofertas.</p>";
+});
 </script>
-  
+
 </body>
 </html>
