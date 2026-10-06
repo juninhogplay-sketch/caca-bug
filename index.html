@@ -109,7 +109,8 @@ card.innerHTML=`
 
 <p>🕐 Encontrado em: ${o.data}</p>
 
-<p><strong>🐛 Nível do bug: ${o.nivel}</strong></p>
+<p><strong>🐛 Nível do bug: <span style="color:${o.nivel === 'ALTO' ? '#e53935' : o.nivel === 'NORMAL' ? '#16a34a' : '#f59e0b'}">${o.nivel}</span></strong></p>
+
 
 <p class="desconto">🔥 ${desconto}% DE DESCONTO</p>
 
