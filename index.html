@@ -104,8 +104,7 @@ card.innerHTML=`
 <span class="bug">${o.tipo==="possivel_bug"?"🐛 POSSÍVEL BUG":"🔥 OFERTA"}</span>
 <img src="https://via.placeholder.com/600x300" style="width:100%;border-radius:12px;margin-bottom:15px;">
 
-<h2>$ {o.produto}</h2>
-
+<h2>${o.produto}</h2>
 <p>🏪 ${o.loja}</p>
 
 <p class="antigo">De: R$ ${Number(o.preco_normal).toFixed(2).replace(".",",")}</p>
