@@ -91,7 +91,7 @@ margin-top:15px;
 <div id="ofertas">Carregando...</div>
 
 <script>
-fetch("./ofertas.json")
+fetch("./ofertas.json?tempo=" + Date.now())
 .then(r=>r.json())
 .then(ofertas=>{
 const area=document.getElementById("ofertas");
