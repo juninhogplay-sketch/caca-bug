@@ -9,6 +9,7 @@
     "data": "05/10/2026 21:30",
     "link": "#",
     "tipo": "possivel_bug"
+    "nivel": "ALTO"
   },
   {
     "produto": "Smartwatch Esportivo",
@@ -20,5 +21,6 @@
     "data": "05/10/2026 21:30",
     "link": "#",
     "tipo": "oferta"
+    "nivel": "NORMAL"
   }
 ]
