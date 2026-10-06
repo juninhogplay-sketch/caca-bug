@@ -1,7 +1,6 @@
 [
   {
     "produto": "Fone Bluetooth Premium",
-    "imagem": "https://via.placeholder.com/600x400",
     "preco_normal": 199.90,
     "preco_oferta": 49.90,
     "loja": "Loja de teste",
@@ -10,7 +9,6 @@
   },
   {
     "produto": "Smartwatch Esportivo",
-    "imagem": "https://via.placeholder.com/600x400",
     "preco_normal": 299.90,
     "preco_oferta": 79.90,
     "loja": "Outra loja",
